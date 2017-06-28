@@ -1,0 +1,43 @@
+<%= form_for(@try) do |f| %>
+  <% if @try.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@try.errors.count, "error") %> prohibited this try from being saved:</h2>
+
+      <ul>
+      <% @try.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :titulo %><br>
+    <%= f.text_field :titulo %>
+  </div>
+  <div class="field">
+    <%= f.label :contenido %><br>
+    <input type="file" id="filePicker" onchange="previewFile()">
+    <textarea id="base64textarea" name="try[contenido]" cols="50" rows="15"></textarea>
+  </div>
+  <script>
+   function previewFile() {
+  var preview = $('#base64textarea');
+  var file    = document.querySelector('input[type=file]').files[0];
+  var reader  = new FileReader();
+
+  reader.onloadend = function () {
+    preview.val(reader.result);
+  }
+
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+}
+  </script>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
