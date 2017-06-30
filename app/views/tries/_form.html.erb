@@ -18,16 +18,18 @@
   <div class="field">
     <%= f.label :contenido %><br>
     <input type="file" id="filePicker" onchange="previewFile()">
-    <textarea id="base64textarea" name="try[contenido]" cols="50" rows="15"></textarea>
+    <input id="base64textarea" type='hidden' name="try[contenido]" cols="50" rows="15">
   </div>
   <script>
+  var cacas = "";
    function previewFile() {
   var preview = $('#base64textarea');
   var file    = document.querySelector('input[type=file]').files[0];
   var reader  = new FileReader();
-
+  
   reader.onloadend = function () {
     preview.val(reader.result);
+    alert("ya");
   }
 
   if (file) {
